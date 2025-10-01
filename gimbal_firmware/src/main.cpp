@@ -1,18 +1,20 @@
 #include <Arduino.h>
+#include "open_loop_speed_control.h"
 
-// put function declarations here:
-int myFunction(int, int);
+// (Optional) If you want non-default pins/address, change here before setup():
+// Example:
+// static OpenLoopSpeedController::Pins customPins = {8, 9, 10, 11};
+// static constexpr uint8_t customAddr = 0x10;
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  // If customizing:
+//   OL() = OpenLoopSpeedController(customPins, customAddr); // <-- would require non-const singleton.
+//   OL().setPwmScale(0.8f);
+//   OL().setDelayBounds(6000, 80);
+
+  OL().begin();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  OL().tick();
 }
